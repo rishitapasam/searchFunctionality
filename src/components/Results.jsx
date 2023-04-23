@@ -14,22 +14,23 @@ export const Results = () => {
       if (location.pathname === '/videos') {
         getResults(`/search?query=${searchTerm} videos`);
       } else {
-        getResults(`/search?query=${searchTerm}&num=40`);
+        getResults(`/search?query=${searchTerm}&num=20`);
       }
     }
   }, [searchTerm, location.pathname]);
 
   if (loading) return <Loading />;
-
   switch (location.pathname) {
     case '/search':
+      console.log(results);
       return (
         <div className="sm:px-56 flex flex-wrap justify-between space-y-6">
-          {results?.results?.map(({ link, title }, index) => (
+          {results?.items?.map(({ link, title, snippet }, index) => (
             <div key={index} className="md:w-2/5 w-full">
               <a href={link} target="_blank" rel="noreferrer">
                 <p className="text-sm">{link.length > 30 ? link.substring(0, 30) : link}</p>
-                <p className="text-lg hover:underline dark:text-blue-300 text-blue-700  ">{title}</p>
+                <p className="text-lg hover:underline dark:text-blue-500 text-blue-700  ">{title}</p>
+                <p className="text-lg hover:underline dark:text-blue-300 text-blue-700  ">{snippet}</p>
               </a>
             </div>
           ))}
