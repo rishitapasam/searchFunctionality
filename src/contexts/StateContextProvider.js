@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 
 const StateContext = createContext();
-const baseUrl = 'https://google-search72.p.rapidapi.com/search?query=word%20cup&gl=us&lr=en&num=10&start=0&sort=relevance';
+const baseUrl = 'https://google-search72.p.rapidapi.com';
 
 export const StateContextProvider = ({ children }) => {
   const [results, setResults] = useState([]);
@@ -11,7 +11,7 @@ export const StateContextProvider = ({ children }) => {
   const getResults = async (url) => {
     setLoading(true);
     console.log(url);
-    const res = await fetch(`${baseUrl}`, {
+    const res = await fetch(`${baseUrl}${url}`, {
       method: 'GET',
       headers: {
         'x-rapidapi-host': 'google-search74.p.rapidapi.com',
